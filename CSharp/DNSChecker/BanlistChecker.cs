@@ -45,7 +45,5 @@ namespace DNSChecker
         {
             return banList.Where(b => b.Equals(address)).Select(_ => ExploitType.Banlist_Match).Take(1);
         }
-
-        
     }
 }

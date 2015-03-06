@@ -81,7 +81,7 @@ namespace ChatSharp
 
             User = user;
             ServerAddress = serverAddress;
-            Encoding = Encoding.ASCII;
+            Encoding = Encoding.UTF8;
             Channels = new ChannelCollection(this);
             Settings = new ClientSettings();
             Handlers = new Dictionary<string, MessageHandler>();
