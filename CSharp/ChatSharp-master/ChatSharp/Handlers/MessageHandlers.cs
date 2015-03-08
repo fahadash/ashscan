@@ -60,7 +60,10 @@ namespace ChatSharp.Handlers
 
         public static void HandleNick(IrcClient client, IrcMessage message)
         {
-            client.User.Nick = message.Parameters[0];
+            if (client.User.Nick == new IrcUser(message.Prefix).Nick)
+            {
+                client.User.Nick = message.Parameters[0];
+            }
         }
 
         public static void HandlePing(IrcClient client, IrcMessage message)
