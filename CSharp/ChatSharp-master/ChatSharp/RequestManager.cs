@@ -23,7 +23,8 @@ namespace ChatSharp
 
         public RequestOperation PeekOperation(string key)
         {
-            return PendingOperations[key];
+            var realKey = PendingOperations.Keys.FirstOrDefault(k => string.Compare(k, key, StringComparison.OrdinalIgnoreCase) == 0);
+            return PendingOperations[realKey];
         }
 
         public RequestOperation DequeueOperation(string key)

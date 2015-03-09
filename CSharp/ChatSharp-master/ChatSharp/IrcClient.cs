@@ -214,6 +214,27 @@ namespace ChatSharp
             }
         }
 
+        public void SendRawMessage(string message)
+        {
+            if (NetworkStream == null)
+            {
+                OnNetworkError(new SocketErrorEventArgs(SocketError.NotConnected));
+                return;
+            }
+
+            var data = Encoding.GetBytes(message + "\r\n");
+
+            if (!IsWriting)
+            {
+                IsWriting = true;
+                NetworkStream.BeginWrite(data, 0, data.Length, MessageSent, message);
+            }
+            else
+            {
+                WriteQueue.Enqueue(message);
+            }
+        }
+
         public void SendRawMessage(string message, params object[] format)
         {
             if (NetworkStream == null)
