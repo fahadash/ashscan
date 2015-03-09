@@ -10,10 +10,14 @@ namespace ChatSharp.Handlers
         public static void HandleWhoIsUser(IrcClient client, IrcMessage message)
         {
             var whois = (WhoIs)client.RequestManager.PeekOperation("WHOIS " + message.Parameters[1]).State;
-            whois.User.Nick = message.Parameters[1];
-            whois.User.User = message.Parameters[2];
-            whois.User.Hostname = message.Parameters[3];
-            whois.User.RealName = message.Parameters[5];
+
+            if (message.Parameters != null && message.Parameters.Length >= 6)
+            {
+                whois.User.Nick = message.Parameters[1];
+                whois.User.User = message.Parameters[2];
+                whois.User.Hostname = message.Parameters[3];
+                whois.User.RealName = message.Parameters[5];
+            }
         }
 
         public static void HandleWhoIsLoggedInAs(IrcClient client, IrcMessage message)
