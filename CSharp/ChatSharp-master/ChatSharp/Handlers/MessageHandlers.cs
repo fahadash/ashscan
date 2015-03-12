@@ -17,6 +17,7 @@ namespace ChatSharp.Handlers
             client.SetHandler("MODE", HandleMode);
             //client.SetHandler("324", HandleMode);
             client.SetHandler("NICK", HandleNick);
+            client.SetHandler("QUIT", HandleQuit);
             client.SetHandler("431", HandleErronousNick);
             client.SetHandler("432", HandleErronousNick);
             client.SetHandler("433", HandleErronousNick);
@@ -63,6 +64,33 @@ namespace ChatSharp.Handlers
             if (client.User.Nick == new IrcUser(message.Prefix).Nick)
             {
                 client.User.Nick = message.Parameters[0];
+            }
+        }
+
+        public static void HandleQuit(IrcClient client, IrcMessage message)
+        {
+            var user = new IrcUser(message.Prefix);
+            if (client.User.Nick != user.Nick)
+            {
+                var channels = client
+                                .Channels
+                                .Where(c => c.Users.Any(u => u.Nick.Equals(user.Nick)));
+                var users = channels
+                    .SelectMany(c=> c.UsersByMode)
+                    .Where(m => m.Value.Contains(user.Nick))
+                    .Select(c => c.Value);
+
+                foreach (var userCollection in users)
+                {
+                    userCollection.Remove(user.Nick);
+                }
+
+                foreach (var channel in channels)
+                {
+                    channel.Users.Remove(user.Nick);
+                }
+
+
             }
         }
 
