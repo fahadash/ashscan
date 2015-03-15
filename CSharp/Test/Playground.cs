@@ -13,7 +13,7 @@ namespace Test
         [TestMethod]
         public void NickAbuserTest()
         {
-            var checker = new NickAbuserChecker("c:\\temp\\bannedwords.txt", () => Enumerable.Empty<string>().ToList());
+            var checker = new NickAbuserChecker("b:\\temp\\bannedwords.txt", () => Enumerable.Empty<string>().ToList());
 
             var result = checker.Check("Khwab-Khwahish-Aur-Zindagi");
 

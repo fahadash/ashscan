@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ChatSharp">
+      <HintPath>..\packages\ChatSharp.1.0.0\lib\net45\ChatSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -54,10 +57,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DNSChecker\DNSChecker.csproj">
+    <ProjectReference Include="..\DNSChecker\ExploitChecker.csproj">
       <Project>{777ABFCE-358A-467E-980A-2E595D4ECA10}</Project>
-      <Name>DNSChecker</Name>
+      <Name>ExploitChecker</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

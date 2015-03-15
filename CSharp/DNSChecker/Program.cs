@@ -54,7 +54,7 @@ namespace DNSChecker
             var efnetRbl = new EfnetRblChecker();
             var checker = new AggregateChecker(drone, barracuda, torSectoor, efnetRbl);
 
-          //  var addresses = ips.Concat(hostsConverted).Where(i => i.AddressFamily == AddressFamily.InterNetwork);
+          //  var ipAddresses = ips.Concat(hostsConverted).Where(i => i.AddressFamily == AddressFamily.InterNetwork);
             var results = lines.Select(add => new AddressResult() { Host = add.ToString(), Exploits = checker.Check(add) }).ToList();
 
             var flat =

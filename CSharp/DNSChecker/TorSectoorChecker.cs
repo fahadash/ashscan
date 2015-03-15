@@ -3,67 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
+using System.Net.Sockets;
 
-namespace DNSChecker
+namespace ExploitChecker
 {
-    using System.Net;
-    using System.Net.Sockets;
-
-    public class TorSectoorChecker : IExploitChecker
+    public class TorSectoorExploitChecker : IPAddressExploitChecker
     {
-        public IEnumerable<ExploitType> Check(string address)
+        public TorSectoorExploitChecker()
+            : base()
         {
-            var addresses = new List<IPAddress>();
+        }
 
-            IPAddress add;
-            if (!IPAddress.TryParse(address, out add))
+        protected override IEnumerable<ExploitType> TestIPAddress(byte[] addressBytes)
+        {
+            var address = string.Format
+            (
+                "{0}.{1}.{2}.{3}.tor.dnsbl.sectoor.de",
+                Convert.ToInt32(addressBytes[3]),
+                Convert.ToInt32(addressBytes[2]),
+                Convert.ToInt32(addressBytes[1]),
+                Convert.ToInt32(addressBytes[0])
+            );
+
+            try
             {
-                try
-                {
-                    var query = Dns.GetHostAddresses(address);
+                var hostAddresses = Dns.GetHostAddresses(address);
 
-                    addresses.AddRange(query);
-                }
-                catch (Exception e)
-                {
-                    return Enumerable.Empty<ExploitType>();
-                }
+                var exploitTypes = hostAddresses
+                    .Select(x => Convert.ToInt32(x.GetAddressBytes()[3]))
+                    .Where(x => x == 2)
+                    .Select(x => ExploitType.TorSectoor_Blacklisted);
+
+                return exploitTypes.ToArray();
             }
-            else
+            catch
             {
-                addresses.Add(add);
+                // TODO : log exception -- Diabolic 15/03/2015
+
+                return Enumerable.Empty<ExploitType>();
             }
-            var exploits = new List<ExploitType>();
-
-            foreach (var addr in addresses.Where(a => a.AddressFamily == AddressFamily.InterNetwork))
-            {
-                var bytes = addr.GetAddressBytes();
-
-                var hostToTest = string.Format(
-                    "{0}.{1}.{2}.{3}.tor.dnsbl.sectoor.de",
-                    Convert.ToInt32(bytes[3]),
-                    Convert.ToInt32(bytes[2]),
-                    Convert.ToInt32(bytes[1]),
-                    Convert.ToInt32(bytes[0]));
-
-                try
-                {
-                    var dnsquery = Dns.GetHostAddresses(hostToTest);
-                    var resultCodes =
-                        dnsquery.Select(x => Convert.ToInt32(x.GetAddressBytes()[3]))
-                            .Where(x => x == 2)
-                            .Select(x => ExploitType.TorSectoor_Blacklisted);
-
-                    exploits.AddRange(resultCodes);
-
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-
-            return exploits;
         }
     }
 }
