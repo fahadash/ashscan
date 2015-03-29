@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{777ABFCE-358A-467E-980A-2E595D4ECA10}</ProjectGuid>
+    <ProjectGuid>{05A85B9A-980D-44D7-9282-A5FBE3352DDD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExploitFinder</RootNamespace>
-    <AssemblyName>ExploitFinder</AssemblyName>
+    <RootNamespace>Extensibility</RootNamespace>
+    <AssemblyName>Extensibility</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,12 +29,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Addins">
-      <HintPath>..\..\packages\Mono.Addins.1.2\lib\net40\Mono.Addins.dll</HintPath>
+      <HintPath>..\packages\Mono.Addins.1.2\lib\net40\Mono.Addins.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,32 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AggregateExploitChecker.cs" />
-    <Compile Include="BanListExploitChecker.cs" />
-    <Compile Include="BlackListedHostExploitChecker.cs" />
-    <Compile Include="DnsExploitFinder.cs" />
-    <Compile Include="Exploit.cs" />
-    <Compile Include="AggregateHostExploitFinder.cs" />
-    <Compile Include="ExploitFinderManager.cs" />
-    <Compile Include="ExtensionNodes\DnsBlacklistProviderNode.cs" />
-    <Compile Include="ExtensionNodes\ExploitCodeNode.cs" />
-    <Compile Include="IBanListExploitChecker.cs" />
-    <Compile Include="IExploitFinder.cs" />
-    <Compile Include="IHostExploitFinder.cs" />
-    <Compile Include="IPAddressExploitChecker.cs" />
-    <Compile Include="ExploitType.cs" />
-    <Compile Include="AbusiveNickExploitChecker.cs" />
-    <Compile Include="LongNickExploitChecker.cs" />
+    <Compile Include="ExtensionManager.cs" />
+    <Compile Include="ICommandHandler.cs" />
+    <Compile Include="IFileSystemInfo.cs" />
+    <Compile Include="IIrcController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserInfo.cs" />
+    <Compile Include="IUserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ExploitChecker.addin.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
