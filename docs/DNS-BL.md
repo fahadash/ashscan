@@ -10,6 +10,7 @@ Load the project and edit the ashscan/Projects/ExploitChecker/ExploitFinder.addi
 
 Under the node of <Extension path ="/ExploitFinder/HostExploitFinder"> add a new node for your new DNS BL Service like the following
 
+```xml
     <DnsBlacklistProvider  ProviderName="DroneBl" HostSuffix="dnsbl.dronebl.org" >
       <ExploitCode  Code="2" Description="IRC Drone"  />
       <ExploitCode  Code="5" Description="Bottler"  />
@@ -23,6 +24,7 @@ Under the node of <Extension path ="/ExploitFinder/HostExploitFinder"> add a new
       <ExploitCode Code="15" Description="Compromised router / gateway"  />
       <ExploitCode  Code="17" Description="Automatically determined botnet"  />
     </DnsBlacklistProvider>
+```
 
 The code to description mapping can be obtained from the DNS-BL Service's website.
 
