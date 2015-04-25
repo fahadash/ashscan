@@ -25,7 +25,7 @@ namespace OperatorCommands
         {
             get
             {
-                return new[] { "op", "voice", "devoice", "deop", "kick", "ban", "kickban", "topic", "say" };
+                return new[] { "op", "voice", "devoice", "deop", "kick", "ban", "unban", "kickban", "topic", "say" };
             }
         }
 
@@ -125,6 +125,13 @@ namespace OperatorCommands
                             {
                                 var message = string.Join(" ", split.Skip(2));
                                 controller.Say(channel, message);
+                            }
+                            break;
+                        case "unban":
+                            if (split.Length == 3 && split[1].StartsWith("#"))
+                            {
+                                var nick = split[2];
+                                controller.Unban(channel, nick);
                             }
                             break;
                     }
