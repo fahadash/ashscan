@@ -8,7 +8,7 @@ For more information on DroneBL usage see http://dronebl.org/docs/howtouse
 
 Load the project and edit the ashscan/Projects/ExploitChecker/ExploitFinder.addin.xml
 
-Under the node of <Extension path ="/ExploitFinder/HostExploitFinder"> add a new node for your new DNS BL Service like the following
+Under the node of ``` <Extension path ="/ExploitFinder/HostExploitFinder">``` add a new node for your new DNS BL Service like the following
 
 ```xml
     <DnsBlacklistProvider  ProviderName="DroneBl" HostSuffix="dnsbl.dronebl.org" >
