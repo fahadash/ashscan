@@ -37,4 +37,4 @@ using Mono.Addins;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly: AddinRoot("Extensibility.Main", "1.0")]
+[assembly: AddinRoot("Extensibility", "1.0")]

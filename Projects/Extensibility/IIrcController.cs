@@ -30,6 +30,14 @@ namespace Extensibility
         void Voice(string channel, string nick);
 
         void Devoice(string channel, string nick);
+        void Op(string channel, string nick);
+
+        void Deop(string channel, string nick);
+        void Topic(string channel, string topic);
+
+        void Join(string channel);
+
+        void Part(string channel);
 
         void Say(string target, string message);
 

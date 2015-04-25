@@ -23,7 +23,7 @@ namespace Extensibility
             {
 
             };
-            AddinManager.Initialize(".", ".", ".");
+            AddinManager.Initialize(".", ".");
             AddinManager.Registry.Update();
         }
 

@@ -13,6 +13,8 @@ namespace Extensibility
     {
         IEnumerable<string> Commands { get; }
 
+        bool OperatorsOnly { get; }
+
         void Handle(IUserInfo oper, IEnumerable<string> tokens);
     }
 }
