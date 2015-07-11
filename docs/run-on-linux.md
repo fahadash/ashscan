@@ -29,10 +29,12 @@ To compile addins,
 
 ##### Compile error 'SendFailure' errors when nuget tries to download referenced packages.
 You will need to download the right certificates to your local cert store. Typically the following four commands do the job
-> $ sudo mozroots --import --machine --sync
-> $ sudo certmgr -ssl -m https://go.microsoft.com
-> $ sudo certmgr -ssl -m https://nugetgallery.blob.core.windows.net
-> $ sudo certmgr -ssl -m https://nuget.org
+```
+$ sudo mozroots --import --machine --sync
+$ sudo certmgr -ssl -m https://go.microsoft.com
+$ sudo certmgr -ssl -m https://nugetgallery.blob.core.windows.net
+$ sudo certmgr -ssl -m https://nuget.org
+```
 
 For more info: https://monomvc.wordpress.com/2012/03/06/nuget-on-mono/
 
