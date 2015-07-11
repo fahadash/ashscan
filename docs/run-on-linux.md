@@ -38,7 +38,7 @@ $ sudo certmgr -ssl -m https://nuget.org
 
 For more info: https://monomvc.wordpress.com/2012/03/06/nuget-on-mono/
 
-We will soon be creating a new build target for Mono to make the above process easier
-
 ##### ashscan terminates with File Not Found exceptions when starts
 This is because the paths to two files `Banlist` and `Banned words list` are not configured properly and/or files don't exist at the specified path. You can use 'touch /path/to/filename' to create a blank file if it doesn't exist.
+
+We will soon be creating a new build target for Mono to make the above process easier
