@@ -16,7 +16,7 @@ using ChatSharp.Events;
 using Topshelf;
 using Topshelf.ServiceConfigurators;
 
-namespace IrcExploitChecker.App
+namespace Ashscan.Bot
 {
     using Mono.Addins;
 

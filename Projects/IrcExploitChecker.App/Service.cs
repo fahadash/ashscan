@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using ChatSharp;
 using ChatSharp.Events;
 
-namespace IrcExploitChecker.App
+namespace Ashscan.Bot
 {
     using ExploitFinder;
 

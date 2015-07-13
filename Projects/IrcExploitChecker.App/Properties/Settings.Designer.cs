@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IrcExploitChecker.App.Properties {
+namespace Ashscan.Bot.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

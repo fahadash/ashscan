@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IrcExploitChecker.App
+namespace Ashscan.Bot
 {
     using Extensibility;
 
-    using IrcExploitChecker.App.Properties;
+    using Ashscan.Bot.Properties;
 
     using Mono.Addins;
 

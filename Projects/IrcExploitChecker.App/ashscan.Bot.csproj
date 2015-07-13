@@ -7,8 +7,8 @@
     <ProjectGuid>{2DE3589C-27AC-4035-8D39-98F30A104B54}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IrcExploitChecker.App</RootNamespace>
-    <AssemblyName>IrcExploitChecker.App</AssemblyName>
+    <RootNamespace>Ashscan.Bot</RootNamespace>
+    <AssemblyName>ashscan.Bot</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
