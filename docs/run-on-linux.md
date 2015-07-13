@@ -16,12 +16,12 @@ The following steps can help you install and run the bot under Linux. They have 
 4. Run `xbuild ExploitChecker.sln`
 
 
-Once the solution is built, change the directory to ./IrcExploitChecker.App/Debug/bin and run IrcExploitChecker.App.exe
+Once the solution is built, change the directory to ./ashscan.Bot/Debug/bin and run ashscan.Bot.exe
 
 To compile addins, 
 
-1. Go to ashscan/addins and compile the addins csproj files using xbuild command line and copy their output to ashscan/IrcExploitChecker.App/Debug/bin/addins (create the addins directory if it doesn't exist)
-2. Copy the file ExploitChecker.addins from Extensibility project directory to ashscan/IrcExploitChecker.App/Debug/bin
+1. Go to ashscan/addins and compile the addins csproj files using xbuild command line and copy their output to ashscan/ashscan.Bot/Debug/bin/addins (create the addins directory if it doesn't exist)
+2. Copy the file ExploitChecker.addins from Extensibility project directory to ashscan/ashscan.Bot/Debug/bin
 3. Launch the IrcExploitChecker.App.exe
 
 

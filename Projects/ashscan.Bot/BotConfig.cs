@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IrcExploitChecker.App
+namespace Ashscan.Bot
 {
     public class BotConfig : ConfigurationSection
     {
