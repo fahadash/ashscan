@@ -14,13 +14,16 @@ namespace Ashscan.Bot
     using Extensibility;
 
     using Mono.Addins;
+    using Extensibility.Contracts;
+    using Ashscan.Bot.Contracts;
 
     [Extension(typeof(IIrcController))]
     public class IrcController : IIrcController
     {
         private readonly IObservable<Tuple<string, IUserInfo>> userJoins;
 
-        private IObservable<Tuple<IUserInfo, string>> privateMessage;
+        private IObservable<IMessage> privateMessage;
+        private IObservable<IMessage> channelMessage;
 
         private IrcClient client;
 
@@ -32,6 +35,22 @@ namespace Ashscan.Bot
                     a => client.UserJoinedChannel += a,
                     a => client.UserJoinedChannel -= a)
                     .Select(e => new Tuple<string, IUserInfo>(e.EventArgs.Channel.Name, new UserInfo(e.EventArgs.User)));
+
+            channelMessage =
+        Observable.FromEventPattern<PrivateMessageEventArgs>(
+            a => client.ChannelMessageRecieved += a,
+            a => client.ChannelMessageRecieved -= a)
+            .Where(m => m.EventArgs.PrivateMessage.IsChannelMessage == true)
+            .Select(e => new UserMessage(e.EventArgs.PrivateMessage.Source,
+                e.EventArgs.PrivateMessage.User.Nick,
+                e.EventArgs.PrivateMessage.User.User,
+                e.EventArgs.PrivateMessage.User.Hostname,
+                e.EventArgs.PrivateMessage.Message));
+
+            Observable.FromEventPattern<PrivateMessageEventArgs>(
+            a => client.ChannelMessageRecieved += a,
+            a => client.ChannelMessageRecieved -= a).Subscribe(x => System.Diagnostics.Debug.WriteLine("Message: "));
+
         }
         public IObservable<Tuple<string, IUserInfo>> Joins
         {
@@ -51,14 +70,14 @@ namespace Ashscan.Bot
             get { throw new NotImplementedException(); }
         }
 
-        public IObservable<Tuple<string, IUserInfo, string>> ChannelMessage
+        public IObservable<IMessage> ChannelMessage
         {
-            get { throw new NotImplementedException(); }
+            get { return channelMessage; }
         }
 
-        public IObservable<Tuple<IUserInfo, string>> PrivateMessage
+        public IObservable<IMessage> PrivateMessage
         {
-            get { throw new NotImplementedException(); }
+            get { return channelMessage; }
         }
 
         public void Kick(string channel, string nick, string reason)

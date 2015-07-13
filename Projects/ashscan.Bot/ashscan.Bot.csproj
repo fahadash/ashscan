@@ -95,6 +95,8 @@
   <ItemGroup>
     <Compile Include="BotConfig.cs" />
     <Compile Include="CommandsHandler.cs" />
+    <Compile Include="Contracts\Message.cs" />
+    <Compile Include="Contracts\User.cs" />
     <Compile Include="IrcController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,7 +112,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="IrcExploitChecker.App_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

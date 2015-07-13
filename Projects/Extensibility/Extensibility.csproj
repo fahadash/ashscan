@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IMessage.cs" />
+    <Compile Include="Contracts\IUser.cs" />
     <Compile Include="ExtensionManager.cs" />
     <Compile Include="ICommandHandler.cs" />
     <Compile Include="IFileSystemInfo.cs" />

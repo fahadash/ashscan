@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Extensibility
 {
 
+    using Extensibility.Contracts;
     using Mono.Addins;
 
     [TypeExtensionPoint]
@@ -16,9 +17,9 @@ namespace Extensibility
         IObservable<Tuple<string, IUserInfo>> Parts { get; }
 
         IObservable<Tuple<string, IUserInfo>> Quits { get; }
-        IObservable<Tuple<string, IUserInfo, string>> ChannelMessage { get; }
+        IObservable<IMessage> ChannelMessage { get; }
 
-        IObservable<Tuple<IUserInfo, string>> PrivateMessage { get; }
+        IObservable<IMessage> PrivateMessage { get; }
 
         string MyNick { get; }
 
