@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExploitChecker.App", "Projects\ExploitChecker.App\ExploitChecker.App.csproj", "{4BC08F09-18D1-4E72-8D76-D8F4260A8245}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ashscan.Bot", "Projects\IrcExploitChecker.App\ashscan.Bot.csproj", "{2DE3589C-27AC-4035-8D39-98F30A104B54}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Addins", "Addins", "{CF70B03F-4812-4D31-8428-BB92613715F5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "Playground\Playground.csproj", "{B865E079-40EA-485C-B540-0A308D6ED9BD}"
@@ -26,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4217FD
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ashscan.Bot", "Projects\ashscan.Bot\ashscan.Bot.csproj", "{2DE3589C-27AC-4035-8D39-98F30A104B54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,10 +34,6 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4BC08F09-18D1-4E72-8D76-D8F4260A8245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4BC08F09-18D1-4E72-8D76-D8F4260A8245}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DE3589C-27AC-4035-8D39-98F30A104B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DE3589C-27AC-4035-8D39-98F30A104B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DE3589C-27AC-4035-8D39-98F30A104B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DE3589C-27AC-4035-8D39-98F30A104B54}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B865E079-40EA-485C-B540-0A308D6ED9BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B865E079-40EA-485C-B540-0A308D6ED9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05A85B9A-980D-44D7-9282-A5FBE3352DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -56,6 +52,10 @@ Global
 		{777ABFCE-358A-467E-980A-2E595D4ECA10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{777ABFCE-358A-467E-980A-2E595D4ECA10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{777ABFCE-358A-467E-980A-2E595D4ECA10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DE3589C-27AC-4035-8D39-98F30A104B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DE3589C-27AC-4035-8D39-98F30A104B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DE3589C-27AC-4035-8D39-98F30A104B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DE3589C-27AC-4035-8D39-98F30A104B54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
