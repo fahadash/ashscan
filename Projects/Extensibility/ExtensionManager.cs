@@ -25,6 +25,16 @@ namespace Extensibility
             };
             AddinManager.Initialize(".", ".");
             AddinManager.Registry.Update();
+
+            var bootstrappers = AddinManager.GetExtensionObjects<IAddinBootstrapper>();
+
+            foreach (var bootstarpper in bootstrappers)
+            {
+                if (bootstarpper.Run() == false)
+                {
+                    // Report failure
+                }
+            }
         }
 
         public static ICommandHandler GetCommandHandler(string command)
@@ -37,6 +47,11 @@ namespace Extensibility
         public static IIrcController GetController()
         {
             return AddinManager.GetExtensionObjects<IIrcController>(true).FirstOrDefault();
+        }
+
+        public static void Initialize()
+        {
+
         }
     }
 }

@@ -62,7 +62,6 @@ namespace Ashscan.Bot
 
             ircClient = new IrcClient( ConfigHelper.Config.Network, new IrcUser(ConfigHelper.Config.Nick, ConfigHelper.Config.Username, string.Empty, ConfigHelper.Config.Fullname));
 
-            var controller = ExtensionManager.GetController();
 
             untoleratedExploits = this.GetUntoleratedExploitTypes();
 

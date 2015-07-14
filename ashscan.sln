@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4217FD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ashscan.Bot", "Projects\ashscan.Bot\ashscan.Bot.csproj", "{2DE3589C-27AC-4035-8D39-98F30A104B54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CannedMessages", "Projects\Addins\CannedMessages\CannedMessages.csproj", "{5F2520CD-C2B2-49F4-9253-E9498B6F46E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{2DE3589C-27AC-4035-8D39-98F30A104B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DE3589C-27AC-4035-8D39-98F30A104B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DE3589C-27AC-4035-8D39-98F30A104B54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F2520CD-C2B2-49F4-9253-E9498B6F46E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F2520CD-C2B2-49F4-9253-E9498B6F46E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F2520CD-C2B2-49F4-9253-E9498B6F46E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F2520CD-C2B2-49F4-9253-E9498B6F46E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,5 +69,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8784FFBE-EE06-4E05-8276-890DFED8E811} = {CF70B03F-4812-4D31-8428-BB92613715F5}
 		{F784E71B-4D95-4710-9C05-9625AA5FAFD8} = {CF70B03F-4812-4D31-8428-BB92613715F5}
+		{5F2520CD-C2B2-49F4-9253-E9498B6F46E7} = {CF70B03F-4812-4D31-8428-BB92613715F5}
 	EndGlobalSection
 EndGlobal
