@@ -42,6 +42,7 @@ namespace Extensibility
 
         void Say(string target, string message);
 
+        void Notice(string target, string message);
         bool AmIOp(string channel);
     }
 }

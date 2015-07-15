@@ -70,6 +70,7 @@ namespace Ashscan.Bot
             get { throw new NotImplementedException(); }
         }
 
+        
         public IObservable<IMessage> ChannelMessage
         {
             get { return channelMessage; }
@@ -150,6 +151,10 @@ namespace Ashscan.Bot
             Service.rawMessageQueue.Enqueue(string.Format("PRIVMSG {0} :{1}", target, message));
         }
 
+        public void Notice(string target, string message)
+        {
+            Service.rawMessageQueue.Enqueue(string.Format("NOTICE {0} :{1}", target, message));
+        }
 
         public string MyNick
         {

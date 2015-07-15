@@ -28,6 +28,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ashscan.Bot", "Projects\ash
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CannedMessages", "Projects\Addins\CannedMessages\CannedMessages.csproj", "{5F2520CD-C2B2-49F4-9253-E9498B6F46E7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{A8A9F511-2A28-41D8-A7F8-EC481E2888A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ashscan.StorageProvider.StsDb", "Projects\Providers\ashscan.StorageProvider.StsDb\ashscan.StorageProvider.StsDb.csproj", "{4D8DBD06-5A2A-4279-A567-34A105A0B3D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +66,10 @@ Global
 		{5F2520CD-C2B2-49F4-9253-E9498B6F46E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F2520CD-C2B2-49F4-9253-E9498B6F46E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F2520CD-C2B2-49F4-9253-E9498B6F46E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D8DBD06-5A2A-4279-A567-34A105A0B3D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D8DBD06-5A2A-4279-A567-34A105A0B3D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D8DBD06-5A2A-4279-A567-34A105A0B3D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D8DBD06-5A2A-4279-A567-34A105A0B3D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +78,6 @@ Global
 		{8784FFBE-EE06-4E05-8276-890DFED8E811} = {CF70B03F-4812-4D31-8428-BB92613715F5}
 		{F784E71B-4D95-4710-9C05-9625AA5FAFD8} = {CF70B03F-4812-4D31-8428-BB92613715F5}
 		{5F2520CD-C2B2-49F4-9253-E9498B6F46E7} = {CF70B03F-4812-4D31-8428-BB92613715F5}
+		{4D8DBD06-5A2A-4279-A567-34A105A0B3D2} = {A8A9F511-2A28-41D8-A7F8-EC481E2888A6}
 	EndGlobalSection
 EndGlobal

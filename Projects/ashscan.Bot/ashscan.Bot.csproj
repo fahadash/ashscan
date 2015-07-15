@@ -97,6 +97,7 @@
     <Compile Include="CommandsHandler.cs" />
     <Compile Include="Contracts\Message.cs" />
     <Compile Include="Contracts\User.cs" />
+    <Compile Include="FileSystemInfo.cs" />
     <Compile Include="IrcController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

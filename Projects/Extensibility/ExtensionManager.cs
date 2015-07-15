@@ -49,6 +49,10 @@ namespace Extensibility
             return AddinManager.GetExtensionObjects<IIrcController>(true).FirstOrDefault();
         }
 
+        public static TObj Get<TObj>() where TObj : class
+        {
+            return AddinManager.GetExtensionObjects<TObj>(true).FirstOrDefault();
+        }
         public static void Initialize()
         {
 

@@ -1,5 +1,6 @@
 <Addins>
     <Directory>./addins</Directory>
+    <Directory>./providers</Directory>
     <Directory>.</Directory>
 	<!--
     <Directory include-subdirs="true">/some/other/directory</Directory>
