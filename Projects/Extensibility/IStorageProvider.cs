@@ -17,6 +17,8 @@ namespace Extensibility
 
         bool Remove(string key);
 
+        IDictionary<string, string> Search(Func<KeyValuePair<string, string>, bool> query);
+
         bool Exists(string key);
     }
 }

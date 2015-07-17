@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ashscan.StorageProvider.StsDb
@@ -13,12 +14,14 @@ namespace ashscan.StorageProvider.StsDb
     [Extension(typeof(IStorageProvider))]
     public class Provider : IStorageProvider, IDisposable
     {
-        private string dataFilePath = string.Empty;
+        private static string dataFilePath = string.Empty;
         bool initialized = false;
-            IStorageEngine engine;
-            ITable<string, string> table;
-            bool open = false;
-        public Provider()
+        static IStorageEngine engine;
+        ITable<string, string> table;
+        bool open = false;
+        int refCount = 0;
+
+        static Provider()
         {
             var fileSystem = ExtensionManager.Get<IFileSystemInfo>();
 
@@ -31,10 +34,14 @@ namespace ashscan.StorageProvider.StsDb
                 if (Directory.Exists(dataFilePath))
                 {
                     fileName = Path.Combine(dataFilePath, "ashscan.stsdb.store");
-                    engine = STSdb.FromFile(fileName + ".db");                    
-                    initialized = true;
-                }                
+                    engine = STSdb.FromFile(fileName + ".db");
+                }
             }
+        }
+
+        public Provider()
+        {
+            Interlocked.Increment(ref refCount);
         }
 
         public void Store(string key, string data)
@@ -42,9 +49,14 @@ namespace ashscan.StorageProvider.StsDb
             if (open)
             {
                 table.InsertOrIgnore(key, data);
+                engine.Commit();
             }
         }
 
+        public IDictionary<string, string> Search(Func<KeyValuePair<string, string>, bool> query)
+        {
+            return table.Where(query).ToDictionary(q => q.Key, q => q.Value);
+        }
         public string Retrieve(string key)
         {
             if (open)
@@ -70,10 +82,11 @@ namespace ashscan.StorageProvider.StsDb
 
         public void Dispose()
         {
-            if (open)
+            Interlocked.Decrement(ref refCount);
+            if (open && refCount <= 0)
             {
-                engine.Close();
                 open = false;
+                engine.Close();
             }
         }
 
