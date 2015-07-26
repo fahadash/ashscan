@@ -14,6 +14,7 @@ namespace CannedMessages
     [Extension]
     public class Bootstrapper : IAddinBootstrapper
     {
+        internal static Random rnd = new Random();
         internal static IIrcController controller = null;
         internal static IStorageProvider storage = null;
         List<string> ignoreList = null;
@@ -152,6 +153,39 @@ namespace CannedMessages
                             }
                         }                        
                     }
+                    else if (all[1].Equals("rand", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var search = tokens.Item1.User.Nick + "_" + all[2];
+                        var nick = string.Empty;
+
+                        if (all.Length > 3)
+                        {
+                            nick = all[3];
+                        }
+
+                        var regex = WildCardToRegular(search);
+
+                        var results = storage.Search(p => Regex.IsMatch(p.Key, regex));
+                        var total  = results.Count;
+
+                        if (total == 0)
+                        {
+                            controller.Notice(tokens.Item1.User.Nick, "Nothing found in your search query. You may have to add your own canned messages.");                           
+                        }
+                        else
+                        {
+                            var values = results.Values.ToList();
+
+                            var message = values[rnd.Next(total)];
+                            
+                            if (!string.IsNullOrEmpty(nick))
+                            {
+                                message = string.Format("{0}, {1}", nick, message);
+                            }
+                            
+                            controller.Say(tokens.Item1.Channel, message);
+                        }
+                    }
                     else if (all.Length == 2)
                     {
                         var key = tokens.Item1.User.Nick + "_" + all[1];
@@ -163,7 +197,7 @@ namespace CannedMessages
                         }
                         else
                         {
-                            controller.Notice(tokens.Item1.User.Nick, "Key not found");
+                            controller.Notice(tokens.Item1.User.Nick, "Key not found, You may have to add your own canned messages.");
                         }
                     }
                     else if (all.Length == 3)
@@ -177,7 +211,7 @@ namespace CannedMessages
                         }
                         else
                         {
-                            controller.Notice(tokens.Item1.User.Nick, "Key not found");
+                            controller.Notice(tokens.Item1.User.Nick, "Key not found, You may have to add your own canned messages.");
                         }
                     }
                   });
