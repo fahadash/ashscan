@@ -1,4 +1,4 @@
-# Contributing to ashscan
+# Setting up build environment
 Congratulations on thinking about contributing to ashscan. This page hopes to guide you through the process of getting you started.
 
 
