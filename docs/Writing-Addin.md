@@ -1,22 +1,35 @@
 #Writing Addins
 
-Every once in a while you would need some functionality in the bot that does not existed. You don't want to have to learn the details of how IRC protocol is handled by the app. You just have a few commands to add to the bot. Addins is the answer.
+Every once in a while you would need some functionality in the bot that does not exist. You don't want to have to learn the details of how IRC protocol is handled by the app. You just have a few commands to add to the bot. Addins is the answer.
 
 There are two addin projects inside Projects/Addins. Deploying addins is simple, you just copy the DLL of an addin along with dependencies into the appdir/addins directory and reload your app.
 
+### Lets Go
+Here is how a typical addin is written. 
 
-Here is how a typical addin is written. We are using Mono.Addins for modularity so the first step is to add the Addin attribute to AssemblyInfo.cs of your class library project.
+#### Start a new Addin Class Library Project
+Each Addin is a DLL created using C# Library Project. In Visual Studio start a new project, in the project type choose 'Class Library' (we prefer you use C# as your language, but you could use any .NET language)
+
+#### Add reference to Mono.Addins using Nuget package manager
+Once you have the new project created, now the time is to add reference to Mono.Addins which you can do using Nuget. Right-Click on References under your project and choose 'Manage Nuget Packages'. If you don't see that menu item, you may have to install/update Nuget Package Manager in your Visual Studio.
+
+Once you have the package dialog open, go to Online from the left-hand navigation pane and on the search bar in top right corner, type in Mono.Addins. Choose Mono.Addins from search results and click Install.
+
+#### Add reference to Extensibility.dll
+Now that you have Mono.Addins, it is time to add reference to Extensibility.dll. Extensibility is a class library project required to be referenced by every addin. It is part of ashscan solution. If you are working directly in ashscan solution, you can simply right click on References under your addin project and click Add Reference and in the dialog box, choose Solutions on the left-hand navigation pane, and within the list of Projects, check "Extensibility". If you are working on your own solution, then locate the Extensibility.dll wherever you may have it compiled and add it using "Browse" option.
+
+#### Edit Assembly.info of your addin
+We are using Mono.Addins for modularity so the first step is to add the Addin attribute to AssemblyInfo.cs of your class library project. AssemblyInfo.cs file should be located under Adding-Project/Properties.
 
 ```CSharp
 [assembly: Addin]
 [assembly: AddinDependency("Extensibility", "1.0")]
 ```
 
-Then add the reference to Extensibility.dll which is one of the projects.
 
-Currently an addin can add command handlers (active chat listening is part of future enhancements)
+This example is a Command Handler addin which listens to commands in a private window so our new command handler class will be derived from ICommandHandler
 
-So our new command handler class will be derived from ICommandHandler
+Rename Class1 to OwnerCommandsHandler and change the content of the class to the following.
 
 ```CSharp
     [Extension]
@@ -83,3 +96,7 @@ So our new command handler class will be derived from ICommandHandler
         }
     }
 ```
+
+#### Building and Deploying
+Once you are done building an addin, its time to deploy. A typical deployment is easy, you copy all the DLLs generated inside Your-Plugin/Bin/Debug folder to ashscan.Bot/Bin/Debug/addins/New-Addin folder, but there are ways you can customize it.
+
