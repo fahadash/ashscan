@@ -5,7 +5,7 @@ Every once in a while you would need some functionality in the bot that does not
 There are two addin projects inside Projects/Addins. Deploying addins is simple, you just copy the DLL of an addin along with dependencies into the appdir/addins directory and reload your app.
 
 ### Lets Go
-Here is how a typical addin is written. 
+Here is how a typical addin is written. We will write a simple Hello World Addin
 
 #### Start a new Addin Class Library Project
 Each Addin is a DLL created using C# Library Project. In Visual Studio start a new project, in the project type choose 'Class Library' (we prefer you use C# as your language, but you could use any .NET language)
@@ -30,11 +30,14 @@ using Mono.Addins; // This should be placed on top among all other usings
 
 This example is a Command Handler addin which listens to commands in a private window so our new command handler class will be derived from ICommandHandler
 
-Rename Class1 to OwnerCommandsHandler and change the content of the class to the following.
+Rename Class1 to HelloWorldHandler and change the content of the class to the following.
 
 ```CSharp
+    using Extensibility;
+    using Mono.Addins;
+
     [Extension]
-    public class OwnerCommandsHandler : ICommandHandler
+    public class HelloWorldHandler : ICommandHandler
     {
 
         // Controller is needed and fetched through Mono.Addins engine if you need to interact with any of the
@@ -53,7 +56,7 @@ Rename Class1 to OwnerCommandsHandler and change the content of the class to the
         {
             get
             {
-                return new[] { "join", "part" };
+                return new[] { "hello" };
             }
         }
 
@@ -68,31 +71,12 @@ Rename Class1 to OwnerCommandsHandler and change the content of the class to the
         // Tokens of the command are passed as array created by splitting the string using space as the delimiter
         public void Handle(IUserInfo oper, IEnumerable<string> tokens)
         {
-            var split = tokens.ToArray();
-
-            if (split.Length >= 2)
+            switch (command.ToLower())
             {
-                var command = split[0];
-
-                var channel = split[1];
-
-                    switch (command.ToLower())
-                    {
-                    // Join channel command
-                        case "join":
-                            if (split.Length == 2 && split[1].StartsWith("#"))
-                            {
-                                controller.Join(channel);
-                            }
-                            break;
-                    // Say something in a channel
-                        case "channelmessage":
-                            if (split.Length => 3 && split[1].StartsWith("#"))
-                            {
-                                controller.Say(channel, string.Join(' ', split.Skip(2));
-                            }
-                            break;
-                    }
+            // hello command
+                case "hello":
+                    controller.Say(user.Nick, "hello");
+                    break;
             }
         }
     }
