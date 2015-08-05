@@ -22,6 +22,7 @@ Now that you have Mono.Addins, it is time to add reference to Extensibility.dll.
 We are using Mono.Addins for modularity so the first step is to add the Addin attribute to AssemblyInfo.cs of your class library project. AssemblyInfo.cs file should be located under Adding-Project/Properties.
 
 ```CSharp
+using Mono.Addins; // This should be placed on top among all other usings
 [assembly: Addin]
 [assembly: AddinDependency("Extensibility", "1.0")]
 ```
