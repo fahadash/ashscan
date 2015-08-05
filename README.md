@@ -19,7 +19,7 @@ Launching your protection bot is very easy. Steps are
 The app now is in stable state. Thanks to our new contributor KhawajaUmerFarooq (aka Diabolic)
 
 ### For Developers
-Feel free to fork this project, bring in your good ideas and send us a pull request. [Click here](./docs/Setting-up-build-Environment.md) to find out how to get you started.
+Feel free to fork this project, bring in your good ideas and send us a pull request. [Click here](./docs/Setting-up-build-environment.md) to find out how to get you started.
 
 For more information on how to use this project including adding new DNS-Blacklist services or writing addins. Refer to the documents in docs folder.
 
