@@ -109,6 +109,22 @@ namespace Ashscan.Bot
             get { return (bool)this["Verbose"]; }
             set { this["Verbose"] = value; }
         }
+
+
+        [ConfigurationProperty("AutoReconnect", IsRequired = false, DefaultValue = false)]
+        public bool AutoReconnect
+        {
+            get { return (bool)this["AutoReconnect"]; }
+            set { this["AutoReconnect"] = value; }
+        }
+
+
+        [ConfigurationProperty("AutoReconnectTime", IsRequired = false, DefaultValue = 10)]
+        public int AutoReconnectTimer
+        {
+            get { return (int)this["AutoReconnectTime"]; }
+            set { this["AutoReconnectTime"] = value; }
+        }
     }
 
     public class ConfigHelper

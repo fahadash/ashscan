@@ -21,6 +21,7 @@ namespace Ashscan.Bot
     using Mono.Addins;
 
     using Properties;
+using System.Text.RegularExpressions;
 
     public class Service
     {
@@ -58,7 +59,17 @@ namespace Ashscan.Bot
                      .Split(',').Where(c => c.StartsWith("#"));
             this.botOperators =  ConfigHelper.Config
                                 .BotOperators.Split(',')
-                                .Select(o => o.Trim());
+                                .Select(o => 
+                                {
+                                    var s = o.Trim();
+
+                                    if (!s.Contains("!"))
+                                    {
+                                        s = string.Format("{0}!*@*", s);
+                                    }
+
+                                    return WildCardToRegular(s);
+                                });
 
             ircClient = new IrcClient( ConfigHelper.Config.Network, new IrcUser(ConfigHelper.Config.Nick, ConfigHelper.Config.Username, string.Empty, ConfigHelper.Config.Fullname));
 
@@ -106,7 +117,9 @@ namespace Ashscan.Bot
             ircClient.RawMessageRecieved += HandleRawMessageReceived;
             ircClient.UserMessageRecieved += HandleUserMessageReceived;
             ircClient.UserJoinedChannel += HandleUserJoinedChannel;
+            ircClient.NetworkError += ircClient_NetworkError;
         }
+
 
         public void Start()
         {
@@ -137,9 +150,28 @@ namespace Ashscan.Bot
             }
         }
 
+
+        void ircClient_NetworkError(object sender, SocketErrorEventArgs e)
+        {
+            var config = ConfigHelper.Config;
+
+            Console.WriteLine("Network error: Will reconnect=" + config.AutoReconnect);
+
+            if (config.AutoReconnect)
+            {
+                var seconds = config.AutoReconnectTimer;
+
+                Thread.Sleep(TimeSpan.FromSeconds(seconds));
+                ircClient.ConnectAsync();
+            }
+        }
         private void HandleRawMessageReceived(object sender, RawMessageEventArgs e)
         {
             Console.WriteLine(e.Message);
+        }
+        private string WildCardToRegular(String value)
+        {
+            return "^" + Regex.Escape(value).Replace("\\?", ".").Replace("\\*", ".*") + "$";
         }
 
         private void HandleUserMessageReceived(object sender, PrivateMessageEventArgs e)
@@ -153,10 +185,10 @@ namespace Ashscan.Bot
                     if (e.PrivateMessage != null)
                     {
                         var split = e.PrivateMessage.Message.Split(' ');
-
+                        var user = e.PrivateMessage.User;
                         var command = ExtensionManager.GetCommandHandler(split[0]);
 
-                        if (command != null && (!command.OperatorsOnly || this.botOperators.Any(x => string.Equals(x, e.PrivateMessage.User.Nick, StringComparison.OrdinalIgnoreCase))))
+                        if (command != null && (!command.OperatorsOnly || this.botOperators.Any(x => Regex.IsMatch(string.Format("{0}!{1}@{2}", user.Nick, user.User, user.Hostname), x))))
                         {
                             command.Handle(new UserInfo(e.PrivateMessage.User),  split);
                         }

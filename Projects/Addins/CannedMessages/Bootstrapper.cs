@@ -153,7 +153,7 @@ namespace CannedMessages
                             }
                         }                        
                     }
-                    else if (all[1].Equals("rand", StringComparison.OrdinalIgnoreCase))
+                    else if (all[1].Equals("rand", StringComparison.OrdinalIgnoreCase) && all.Length >= 3)
                     {
                         var search = tokens.Item1.User.Nick + "_" + all[2];
                         var nick = string.Empty;
