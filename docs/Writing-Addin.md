@@ -71,6 +71,7 @@ Rename Class1 to HelloWorldHandler and change the content of the class to the fo
         // Tokens of the command are passed as array created by splitting the string using space as the delimiter
         public void Handle(IUserInfo oper, IEnumerable<string> tokens)
         {
+            command = tokens.First();
             switch (command.ToLower())
             {
             // hello command
