@@ -47,8 +47,6 @@ using System.Text.RegularExpressions;
         public Service()
             : base()
         {
-            var blackListedHostsPath = ConfigHelper.Config.BlackListedHostsPath;
-            var abusiveWordsPath = ConfigHelper.Config.AbusiveWordsPath;
 
             this.ignoredChannels = new[]
             {
@@ -71,14 +69,17 @@ using System.Text.RegularExpressions;
                                     return WildCardToRegular(s);
                                 });
 
-            ircClient = new IrcClient( ConfigHelper.Config.Network, new IrcUser(ConfigHelper.Config.Nick, ConfigHelper.Config.Username, string.Empty, ConfigHelper.Config.Fullname));
+            CreateIrcClient();
 
+            untoleratedExploits = this.GetUntoleratedExploitTypes();            
+        }
 
-            untoleratedExploits = this.GetUntoleratedExploitTypes();
-
-            //exploitTypes.Add(ExploitType.Drones_Flooding);
-
-
+        private void CreateIrcClient()
+        {
+            ircClient = new IrcClient(ConfigHelper.Config.Network, new IrcUser(ConfigHelper.Config.Nick, ConfigHelper.Config.Username, string.Empty, ConfigHelper.Config.Fullname));
+            
+            var blackListedHostsPath = ConfigHelper.Config.BlackListedHostsPath;
+            var abusiveWordsPath = ConfigHelper.Config.AbusiveWordsPath;
             // NOTE : do these objects have to be recreated between reconnects? -- Diabolic 15/03/2015
             this.cancellationTokenSource = new CancellationTokenSource();
             rawMessageQueue = new ConcurrentQueue<string>();
@@ -111,7 +112,7 @@ using System.Text.RegularExpressions;
                     .Select(a => a.Nick)
                     .ToList(),
                 blackListedHostsPath,
-                ConfigHelper.Config.LongNickLength);      
+                ConfigHelper.Config.LongNickLength);
 
             ircClient.ConnectionComplete += HandleClientConnectionCompleteEvent;
             ircClient.RawMessageRecieved += HandleRawMessageReceived;
@@ -119,7 +120,6 @@ using System.Text.RegularExpressions;
             ircClient.UserJoinedChannel += HandleUserJoinedChannel;
             ircClient.NetworkError += ircClient_NetworkError;
         }
-
 
         public void Start()
         {
@@ -160,8 +160,12 @@ using System.Text.RegularExpressions;
             if (config.AutoReconnect)
             {
                 var seconds = config.AutoReconnectTimer;
-
+                ircClient = new IrcClient(ConfigHelper.Config.Network, new IrcUser(ConfigHelper.Config.Nick, ConfigHelper.Config.Username, string.Empty, ConfigHelper.Config.Fullname));
                 Thread.Sleep(TimeSpan.FromSeconds(seconds));
+
+
+                CreateIrcClient();
+
                 ircClient.ConnectAsync();
             }
         }
