@@ -11,6 +11,8 @@ namespace Extensibility
     using System.Reflection;
 
     using Mono.Addins;
+    using Extensibility.Attributes;
+    using Extensibility.Exceptions;
 
     public class ExtensionManager
     {
@@ -30,9 +32,18 @@ namespace Extensibility
 
             foreach (var bootstarpper in bootstrappers)
             {
-                if (bootstarpper.Run() == false)
+                var missing = FillDependencies(bootstarpper);
+
+                if (missing.Count() == 0)
                 {
-                    // Report failure
+                    if (bootstarpper.Run() == false)
+                    {
+                        // Report failure
+                    }
+                }
+                else
+                {
+                    // report failure: dependencies could not be loaded
                 }
             }
         }
@@ -51,11 +62,48 @@ namespace Extensibility
 
         public static TObj Get<TObj>() where TObj : class
         {
-            return AddinManager.GetExtensionObjects<TObj>(true).FirstOrDefault();
+
+            var obj = AddinManager.GetExtensionObjects<TObj>(true).FirstOrDefault();
+
+            var missing = FillDependencies(obj);
+
+            if (missing.Count() != 0)
+            {
+                throw new MissingDependencyException(missing);
+            }
+
+            return obj;
         }
         public static void Initialize()
         {
 
+        }
+
+        private static string[] FillDependencies(object obj)
+        {
+
+            var properties = obj.GetType()
+                                .GetProperties()
+                                .Select(p => new
+                                {
+                                    Property = p,
+                                    Attribute = (DependencyAttribute)Attribute.GetCustomAttribute(p, typeof(DependencyAttribute))
+                                })
+                                .Where(p => p.Attribute != null)
+                                .Select(p => new { Property = p.Property, Value = AddinManager.GetExtensionObjects(p.Attribute.Type, true).FirstOrDefault() })
+                                .ToArray();
+
+            var missing = properties
+                            .Where(p => p.Value == null)
+                            .Select(p => p.Property.Name)
+                            .ToArray();
+
+            foreach (var dependency in properties)
+            {
+                dependency.Property.SetValue(obj, dependency.Value);
+            }
+
+            return missing;
         }
     }
 }

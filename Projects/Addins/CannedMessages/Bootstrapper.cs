@@ -1,4 +1,5 @@
 ﻿using Extensibility;
+using Extensibility.Attributes;
 using Extensibility.Contracts;
 using Mono.Addins;
 using System;
@@ -15,8 +16,13 @@ namespace CannedMessages
     public class Bootstrapper : IAddinBootstrapper
     {
         internal static Random rnd = new Random();
-        internal static IIrcController controller = null;
-        internal static IStorageProvider storage = null;
+
+        [Dependency(typeof(IIrcController))]
+        public IIrcController controller {get; set; }
+
+        [Dependency(typeof(IStorageProvider))]
+        public IStorageProvider storage { get; set; }
+
         List<string> ignoreList = null;
         const string ignoreListKey="__/cannedmessages_ignorelist";
         public Bootstrapper()
@@ -31,8 +37,8 @@ namespace CannedMessages
         }
         public bool Run()
         {
-            controller = ExtensionManager.GetController();
-            storage = ExtensionManager.Get<IStorageProvider>();
+            //controller = ExtensionManager.GetController();
+            //storage = ExtensionManager.Get<IStorageProvider>();
             ignoreList = (storage.Retrieve(ignoreListKey) ?? string.Empty)
                             .Split(new [] {','}, StringSplitOptions.RemoveEmptyEntries)
                             .ToList();
