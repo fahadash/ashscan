@@ -44,5 +44,9 @@ namespace Extensibility
 
         void Notice(string target, string message);
         bool AmIOp(string channel);
+
+        string ReportingChannel { get; }
+
+        IEnumerable<IChannelUser> GetChannelUsers(string channelName);
     }
 }

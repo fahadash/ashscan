@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="BotConfig.cs" />
     <Compile Include="CommandsHandler.cs" />
+    <Compile Include="Contracts\ChannelUser.cs" />
     <Compile Include="Contracts\Message.cs" />
     <Compile Include="Contracts\User.cs" />
     <Compile Include="FileSystemInfo.cs" />
@@ -122,10 +123,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExploitFinder\ExploitFinder.csproj">
-      <Project>{777abfce-358a-467e-980a-2e595d4eca10}</Project>
-      <Name>ExploitFinder</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Extensibility\Extensibility.csproj">
       <Project>{05a85b9a-980d-44d7-9282-a5fbe3352ddd}</Project>
       <Name>Extensibility</Name>

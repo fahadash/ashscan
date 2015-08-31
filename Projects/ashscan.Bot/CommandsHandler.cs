@@ -19,7 +19,7 @@ namespace Ashscan.Bot
         private IIrcController controller = null;
         public CommandsHandler()
         {
-            this.Commands = new[] { "tolerance", "verbose" };
+            this.Commands = new[] { "verbose" };
             this.controller = ExtensionManager.GetController();
         }
         public IEnumerable<string> Commands { get; private set; }
@@ -38,33 +38,7 @@ namespace Ashscan.Bot
 
             var command = split[0];
 
-            if (command == "tolerance")
-            {
-                if (split.Length > 1)
-                {
-                    int newlevel;
-                    if (!int.TryParse(split[1], out newlevel) || newlevel < 0 || newlevel > 10)
-                    {
-                        controller.Say(oper.Nick, string.Format("Invalid level. Choose between 0-10"));
-                    }
-                    else
-                    {
-                        ConfigHelper.Config.ToleranceLevel = newlevel;
-                        //Settings.Default.Save();
-                        controller.Say(
-                            oper.Nick,
-                            string.Format("Current Tolerance level is now set to: {0}", ConfigHelper.Config.ToleranceLevel));
-                    }
-                }
-                else
-                {
-                    controller.Say(
-                        oper.Nick,
-                        string.Format("Current Tolerance level is: {0}", ConfigHelper.Config.ToleranceLevel));
-                }
-                
-            }
-            else if (command == "verbose")
+            if (command == "verbose")
             {
                 if (split.Length == 2)
                 {

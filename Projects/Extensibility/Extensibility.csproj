@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\DependencyAttribute.cs" />
+    <Compile Include="Contracts\IChannelUser.cs" />
     <Compile Include="Contracts\IMessage.cs" />
     <Compile Include="Contracts\IUser.cs" />
     <Compile Include="Exceptions\MissingDependencyException.cs" />

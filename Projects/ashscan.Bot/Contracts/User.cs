@@ -1,4 +1,5 @@
-﻿using Extensibility.Contracts;
+﻿using ChatSharp;
+using Extensibility.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,20 @@ namespace Ashscan.Bot.Contracts
         {
             get;
             set;
+        }
+
+        public User(IrcUser user)
+        {
+            this.Mask = string.Format("{0}!{1}@{2}", user.Nick, user.User, user.Hostname);
+
+            this.Nick = user.Nick;
+            this.Username = user.User;
+            this.Host = user.Hostname;
+        }
+
+        public User()
+        {
+
         }
     }
 }
