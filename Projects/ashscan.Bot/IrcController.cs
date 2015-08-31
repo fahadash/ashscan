@@ -201,7 +201,7 @@ namespace Ashscan.Bot
 
         public string ReportingChannel
         {
-            get { throw new NotImplementedException(); }
+            get { return ConfigHelper.Config.ReportingChannel; }
         }
 
         public IEnumerable<IChannelUser> GetChannelUsers(string channelName)

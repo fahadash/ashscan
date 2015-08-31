@@ -48,7 +48,7 @@ namespace ashscan.StorageProvider.StsDb
         {
             if (open)
             {
-                table.InsertOrIgnore(key, data);
+                table[key] =  data;
                 engine.Commit();
             }
         }
