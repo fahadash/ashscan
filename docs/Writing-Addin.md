@@ -69,8 +69,9 @@ Rename Class1 to HelloWorldHandler and change the content of the class to the fo
             }
         }
         // Tokens of the command are passed as array created by splitting the string using space as the delimiter
-        public void Handle(IUserInfo oper, IEnumerable<string> tokens)
+        public void Handle(IUserInfo user, IEnumerable<string> tokens)
         {
+            var command = tokens.First();
             switch (command.ToLower())
             {
             // hello command
@@ -81,6 +82,9 @@ Rename Class1 to HelloWorldHandler and change the content of the class to the fo
         }
     }
 ```
+
+#### COM Interop error during building
+If you get a COM Interop error during the build, go to the References of your addin project, right click on Extensibility and click Properties, and set `Embed Interop Types` to False.
 
 #### Building and Deploying
 Once you are done building an addin, its time to deploy. A typical deployment is easy, you copy all the DLLs generated inside Your-Plugin/Bin/Debug folder to ashscan.Bot/Bin/Debug/addins/New-Addin folder, but there are ways you can customize it.
