@@ -38,9 +38,9 @@ namespace Ashscan.Bot
                             sc.WhenStopped<Service>(service => service.Stop());
                         });
 
-                    c.SetServiceName("IrcExploitChecker");
-                    c.SetDisplayName("IRC Exploit Checker");
-                    c.SetDescription("Keeps your channels free from various exploits");
+                    c.SetServiceName("ashscan.Bot");
+                    c.SetDisplayName("ashscan Bot");
+                    c.SetDescription("An amazing bot");
 
                     c.EnableShutdown();
 

@@ -214,7 +214,8 @@ namespace Ashscan.Bot
                    {
                        Channel = channelName,
                        User = new User(user),
-                       Modes = channel.UsersByMode
+                       Modes = channel.UsersByMode!=null?
+                                   channel.UsersByMode
                                    .Where(m => m.Value.Contains(user))
                                    .Select(m => m.Key)
                                    .Select(m =>
@@ -239,7 +240,7 @@ namespace Ashscan.Bot
                                        {
                                            return UserChannelMode.Unknown;
                                        }
-                                   }).ToArray()
+                                   }).ToArray() : Enumerable.Empty<UserChannelMode>().ToArray()
                    }).ToArray();
         }
     }
