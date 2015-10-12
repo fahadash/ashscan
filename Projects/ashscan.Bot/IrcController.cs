@@ -197,5 +197,51 @@ namespace Ashscan.Bot
         {
             client.PartChannel(channel);
         }
+
+
+        public string ReportingChannel
+        {
+            get { return ConfigHelper.Config.ReportingChannel; }
+        }
+
+        public IEnumerable<IChannelUser> GetChannelUsers(string channelName)
+        {
+            return 
+            client.Channels
+                .Where(c => c.Name.Equals(channelName, StringComparison.OrdinalIgnoreCase))
+                .SelectMany(c => c.Users,
+                   (channel, user) => new ChannelUser()
+                   {
+                       Channel = channelName,
+                       User = new User(user),
+                       Modes = channel.UsersByMode!=null?
+                                   channel.UsersByMode
+                                   .Where(m => m.Value.Contains(user))
+                                   .Select(m => m.Key)
+                                   .Select(m =>
+                                   {
+                                       if (m == 'v')
+                                       {
+                                           return UserChannelMode.Voice;
+                                       }
+                                       else if (m == 'o')
+                                       {
+                                           return UserChannelMode.Op;
+                                       }
+                                       else if (m == 'e')
+                                       {
+                                           return UserChannelMode.Exempt;
+                                       }
+                                       else if (m == 'b')
+                                       {
+                                           return UserChannelMode.Ban;
+                                       }
+                                       else
+                                       {
+                                           return UserChannelMode.Unknown;
+                                       }
+                                   }).ToArray() : Enumerable.Empty<UserChannelMode>().ToArray()
+                   }).ToArray();
+        }
     }
 }

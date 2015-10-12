@@ -11,7 +11,7 @@ namespace Extensibility.Exceptions
         string[] names;
         public MissingDependencyException(string[] names)
         {
-            
+            this.names = names;
         }
 
         public override string Message

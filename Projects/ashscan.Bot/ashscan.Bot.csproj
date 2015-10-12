@@ -61,10 +61,20 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Deploy All|AnyCPU'">
+    <OutputPath>bin\Deploy All\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ChatSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ChatSharp.1.0.1\lib\net45\ChatSharp.dll</HintPath>
+      <HintPath>..\..\..\..\temp\ChatSharp-master\ChatSharp\bin\Release\ChatSharp.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Addins">
       <HintPath>..\..\packages\Mono.Addins.1.2\lib\net40\Mono.Addins.dll</HintPath>
@@ -97,6 +107,7 @@
   <ItemGroup>
     <Compile Include="BotConfig.cs" />
     <Compile Include="CommandsHandler.cs" />
+    <Compile Include="Contracts\ChannelUser.cs" />
     <Compile Include="Contracts\Message.cs" />
     <Compile Include="Contracts\User.cs" />
     <Compile Include="FileSystemInfo.cs" />
@@ -122,10 +133,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExploitFinder\ExploitFinder.csproj">
-      <Project>{777abfce-358a-467e-980a-2e595d4eca10}</Project>
-      <Name>ExploitFinder</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Extensibility\Extensibility.csproj">
       <Project>{05a85b9a-980d-44d7-9282-a5fbe3352ddd}</Project>
       <Name>Extensibility</Name>
@@ -164,6 +171,26 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>rd /s /q "$(SolutionDir)\Release"</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>mkdir "$(SolutionDir)Release"
+XCOPY "$(TargetDir)*.dll" "$(SolutionDir)Release"
+XCOPY "$(TargetDir)*.exe" "$(SolutionDir)Release"
+XCOPY "$(TargetDir)*.xml" "$(SolutionDir)Release"
+XCOPY "$(TargetDir)*.config" "$(SolutionDir)Release"
+XCOPY "$(TargetDir)*.addins" "$(SolutionDir)Release"
+XCOPY "$(TargetDir)*.pdb" "$(SolutionDir)Release"
+
+DEL "$(SolutionDir)Release\*.vshost.*"
+
+MKDIR "$(SolutionDir)Release\providers"
+MKDIR "$(SolutionDir)Release\addins"
+MKDIR "$(SolutionDir)Release\Data"
+XCOPY "$(SolutionDir)UnlockFiles.ps1" "$(SolutionDir)Release"
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

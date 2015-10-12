@@ -28,6 +28,6 @@ Under the node of ``` <Extension path ="/ExploitFinder/HostExploitFinder">``` ad
 
 The code to description mapping can be obtained from the DNS-BL Service's website.
 
-You will need to recompile the ExploitFinder project and deploy the latest DLL in the app directory (not addins directory). It will be picked up when you restart your app by Mono.Addins.
+You will need to recompile the ExploitFinder plugin and and deploy the binaries into the addins/exploitfinder. It will be picked up when you restart your bot.
 
 The alternate way to compiling is using External Mono.Addin manifests. See more here: https://github.com/mono/mono-addins/wiki/Add-in-Discovery

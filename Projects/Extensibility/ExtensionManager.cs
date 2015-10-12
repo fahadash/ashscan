@@ -81,8 +81,8 @@ namespace Extensibility
 
         private static string[] FillDependencies(object obj)
         {
-
-            var properties = obj.GetType()
+            var type =  obj.GetType();
+            var properties = type
                                 .GetProperties()
                                 .Select(p => new
                                 {
@@ -90,7 +90,10 @@ namespace Extensibility
                                     Attribute = (DependencyAttribute)Attribute.GetCustomAttribute(p, typeof(DependencyAttribute))
                                 })
                                 .Where(p => p.Attribute != null)
-                                .Select(p => new { Property = p.Property, Value = AddinManager.GetExtensionObjects(p.Attribute.Type, true).FirstOrDefault() })
+                                .Select(p => new { Property = p.Property, Value = AddinManager.GetExtensionObjects(p.Attribute.Type, 
+                                    // Poor man's context sharing query
+                                    !type.Name.Equals("IStorageProvider")
+                                    ).FirstOrDefault() })
                                 .ToArray();
 
             var missing = properties

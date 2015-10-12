@@ -1,7 +1,9 @@
 # ashscan
 R&amp;D IRC Bot project. Was initially created to slow down the flooders and abusers. But now a fully extensible addin-enabled project that can allow addition of external features through separate addin DLLs. There are a few addins written already and can be found in in [Addins directory](./Projects/Addins). Check the respective Readme.md file of each Addin to find more about them. Writing your own addins is a piece of cake, [click here](./docs/Writing-Addin.md) to find out everything you need to know about Creating and Deploying Addins.
 
-It is a basic bot with configuration parameters in app.config. It checks against DNS-Blacklistss, Banned Hostlists maintained in a text file, word abuse in nicknames. 
+It is a basic bot with configuration parameters in app.config. We have decoupled the Exploit Finder and Protection-Bot feature out to a separate plugin. You can choose whether or not to include that in your bot. It checks against DNS-Blacklistss, Banned Hostlists maintained in a text file, word abuse in nicknames. 
+
+So now ashscan is just a plugin enabled bot with no features without plugins.
 
 ashscan is using Chatsharp as IRC Library, but it is loosely coupled to that so you can rip it out and switch it to another IRC library of your choice if you have to.
 
