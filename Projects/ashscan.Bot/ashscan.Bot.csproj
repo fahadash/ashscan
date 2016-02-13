@@ -173,6 +173,7 @@
   </Target>
   <PropertyGroup>
     <PreBuildEvent  Condition="$(OS) == 'Windows_NT'">rd /s /q "$(SolutionDir)\Release"</PreBuildEvent>
+    <PreBuildEvent Condition="'$(OS)' == 'Unix'">rm -rf $(SolutionDir)release</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent Condition="$(OS) == 'Windows_NT'">mkdir "$(SolutionDir)Release"
@@ -189,6 +190,23 @@ MKDIR "$(SolutionDir)Release\providers"
 MKDIR "$(SolutionDir)Release\addins"
 MKDIR "$(SolutionDir)Release\Data"
 XCOPY "$(SolutionDir)UnlockFiles.ps1" "$(SolutionDir)Release"
+</PostBuildEvent>
+<PostBuildEvent Condition="'$(OS)' == 'Unix'">mkdir $(SolutionDir)release
+cp $(TargetDir)*.dll $(SolutionDir)release
+cp $(TargetDir)*.exe $(SolutionDir)release
+cp $(TargetDir)*.xml $(SolutionDir)release
+cp $(TargetDir)*.config $(SolutionDir)release
+cp $(TargetDir)*.addins $(SolutionDir)release
+cp $(TargetDir)*.pdb $(SolutionDir)release
+
+
+rm $(SolutionDir)release/*.vhost.*
+
+mkdir $(SolutionDir)release/providers
+mkdir $(SolutionDir)release/addins
+
+mkdir $(SolutionDir)release/data
+
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
