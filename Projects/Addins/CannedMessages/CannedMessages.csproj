@@ -88,6 +88,12 @@
   <PropertyGroup>
     <PostBuildEvent Condition="$(OS) == 'Windows_NT'">MKDIR "$(SolutionDir)Release\addins\cannedmessages"
 XCOPY "$(TargetDir)*" "$(SolutionDir)Release\addins\cannedmessages\"</PostBuildEvent>
+
+<PostBuildEvent Condition="'$(OS)' == 'Unix'">mkdir -p $(SolutionDir)release/addins/cannedmessages
+cp $(TargetDir)/* $(SolutionDir)release/addins/cannedmessages/
+</PostBuildEvent>
+
+
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -93,11 +93,11 @@
   <PropertyGroup>
     <PostBuildEvent Condition="$(OS) == 'Windows_NT'">MKDIR "$(SolutionDir)Release\providers\stsdb_storage"
 XCOPY "$(TargetDir)*" "$(SolutionDir)Release\providers\stsdb_storage\"</PostBuildEvent>
-    <PostBuildEvent Condition="'$(OS)' == 'Unix'">mkdir  -p $(SolutionDir)release/providers/stsdb_storage</PostBuildEvent>
 
-    <PostBuildEvent Condition="'$(OS)' == 'Unix'">mkdir -p $(SolutionDir)release/providers/stsdb_storage
-         cp $(TargetDir) $(SolutionDir)release/providers/stsdb_storage
-    </PostBuildEvent>
+
+<PostBuildEvent Condition="'$(OS)' == 'Unix'">mkdir -p $(SolutionDir)release/providers/stsdb_storage
+cp $(TargetDir)/* $(SolutionDir)release/providers/stsdb_storage/
+</PostBuildEvent>
 
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

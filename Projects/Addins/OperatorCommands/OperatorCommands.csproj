@@ -76,6 +76,14 @@
   <PropertyGroup>
     <PostBuildEvent Condition="$(OS) == 'Windows_NT'">MKDIR "$(SolutionDir)Release\addins\operatorcommands"
 XCOPY "$(TargetDir)*" "$(SolutionDir)Release\addins\operatorcommands\"</PostBuildEvent>
+
+
+<PostBuildEvent Condition="'$(OS)' == 'Unix'">mkdir -p $(SolutionDir)release/addins/operatorcommands
+cp $(TargetDir)/* $(SolutionDir)release/addins/operatorcommands/
+</PostBuildEvent>
+
+
+
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
