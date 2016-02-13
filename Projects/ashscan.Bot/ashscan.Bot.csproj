@@ -172,10 +172,10 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>rd /s /q "$(SolutionDir)\Release"</PreBuildEvent>
+    <PreBuildEvent  Condition="$(OS) == 'Windows_NT'">rd /s /q "$(SolutionDir)\Release"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>mkdir "$(SolutionDir)Release"
+    <PostBuildEvent Condition="$(OS) == 'Windows_NT'">mkdir "$(SolutionDir)Release"
 XCOPY "$(TargetDir)*.dll" "$(SolutionDir)Release"
 XCOPY "$(TargetDir)*.exe" "$(SolutionDir)Release"
 XCOPY "$(TargetDir)*.xml" "$(SolutionDir)Release"
