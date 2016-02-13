@@ -1,9 +1,9 @@
 ashscan can run under Linux using Mono. The projects in this repository are targetted to .NET Framework 4.5 and require Mono 3.x.x.
 
 ## Installation
-The following steps can help you install and run the bot under Linux. They have been tested on 13.4 LTS, and OpenSUSE 13.2.
+The following steps can help you install and run the bot under Linux. They have been tested on Ubuntu 13.4 LTS, and OpenSUSE 13.2.
 
-
+0. Clone ashscan to some directory on your linux machine.
 1. Install Mono by following the instructions on [their page here](http://www.mono-project.com/docs/getting-started/install/linux/) 
 2. Edit the app.config file and enable the appSettings and edit the two file paths for banlist and banwords. Make sure the file paths are fully qualified and they are Linux-style paths
 3. On the directory where you have ashscan repo downloaded, follow the instructions on [this blog post](http://dlafferty.blogspot.com/2013/08/building-your-microsoft-solution-with.html) to download NuGet.exe into .nuget directory. (You can disregard the portion about compiling and configuring for windows) Typically the following instructions work
