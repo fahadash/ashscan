@@ -98,7 +98,7 @@ namespace Ashscan.Bot
         {
             if ("!@.".Any(mask.Contains))
             {
-                Service.rawMessageQueue.Enqueue(string.Format("MODE {0} +v {1}", channel, mask));
+                Service.rawMessageQueue.Enqueue(string.Format("MODE {0} +b {1}", channel, mask));
             }
             else
             {
@@ -119,7 +119,7 @@ namespace Ashscan.Bot
         {
             if ("!@.".Any(mask.Contains))
             {
-                Service.rawMessageQueue.Enqueue(string.Format("MODE {0} +v {1}", channel, mask));
+                Service.rawMessageQueue.Enqueue(string.Format("MODE {0} -b {1}", channel, mask));
             }
             else
             {
