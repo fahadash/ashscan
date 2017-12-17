@@ -1,3 +1,10 @@
+Update: December 17, 2017: We now have a Docker build. Try out the Dockerfile in the source or you can use our official image.
+
+```
+docker pull fahadash/ashscan
+docker run --rm fahadash/ashscan /ashscan/dockerstart.sh
+```
+
 # ashscan
 R&amp;D IRC Bot project. Was initially created to slow down the flooders and abusers. But now a fully extensible addin-enabled project that can allow addition of external features through separate addin DLLs. There are a few addins written already and can be found in in [Addins directory](./Projects/Addins). Check the respective Readme.md file of each Addin to find more about them. Writing your own addins is a piece of cake, [click here](./docs/Writing-Addin.md) to find out everything you need to know about Creating and Deploying Addins.
 
