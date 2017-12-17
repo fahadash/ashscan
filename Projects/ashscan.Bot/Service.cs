@@ -131,6 +131,7 @@ using System.Text.RegularExpressions;
 
         void ircClient_NetworkError(object sender, SocketErrorEventArgs e)
         {
+#if !DOCKER
             var config = ConfigHelper.Config;
 
             Console.WriteLine("Network error: Will reconnect=" + config.AutoReconnect);
@@ -142,6 +143,9 @@ using System.Text.RegularExpressions;
                 Thread.Sleep(TimeSpan.FromSeconds(seconds));
                 ircClient.ConnectAsync();
             }
+#else
+            Environment.Exit(0);
+#endif
         }
         private void HandleRawMessageReceived(object sender, RawMessageEventArgs e)
         {
