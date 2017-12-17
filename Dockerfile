@@ -21,6 +21,6 @@ RUN touch /ashscan/release/data/Bannedhosts.txt
 RUN touch /ashscan/release/data/Bannedwords.txt
 
 RUN mkdir /ashscan/release/Data
-
+RUN chmod u+x /ashscan/dockerstart.sh
 
 
