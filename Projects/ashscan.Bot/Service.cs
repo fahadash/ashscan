@@ -108,6 +108,10 @@ using System.Text.RegularExpressions;
         {
             rawHolder.Dispose();
             ircClient.Quit();
+
+#if DOCKER
+            Environment.Exit();
+#endif
         }
 
         private void HandleClientConnectionCompleteEvent(object sender, EventArgs e)
