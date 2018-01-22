@@ -2,7 +2,7 @@ Update: December 17, 2017: We now have a Docker build. Try out the Dockerfile in
 
 ```
 docker pull fahadash/ashscan
-docker run --rm fahadash/ashscan /ashscan/dockerstart.sh
+docker run -t --rm fahadash/ashscan /ashscan/dockerstart.sh
 ```
 
 # ashscan
