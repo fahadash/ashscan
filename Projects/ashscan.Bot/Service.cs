@@ -110,7 +110,7 @@ using System.Text.RegularExpressions;
             ircClient.Quit();
 
 #if DOCKER
-            Environment.Exit();
+            Environment.Exit(0);
 #endif
         }
 
